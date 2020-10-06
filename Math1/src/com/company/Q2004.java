@@ -13,29 +13,28 @@ public class Q2004 {
         String[] str = bf.readLine().split(" ");
         long n = Long.parseLong(str[0]);
         long m = Long.parseLong(str[1]);
-        m = m>n-m? n-m : m;
-        long nCnt5 = count((n-m)+1,n,5);
-        long nCnt2 = count((n-m)+1,n,2);
 
-        long nCnt = nCnt2 > nCnt5 ? nCnt5 : nCnt2;
+        long nCnt5 = count(n,5);
+        long nCnt2 = count(n,2);
 
-        int mCnt = count(1,m,5);
+        long mCnt5 = count(m,5);
+        long mCnt2 = count(m,2);
 
-        System.out.println(nCnt - mCnt);
+        long nmCnt5 = count(n-m,5);
+        long nmCnt2 = count(n-m,2);
+
+        long cnt2 = nCnt2 - (mCnt2+nmCnt2);
+        long cnt5 = nCnt5 - (mCnt5+nmCnt5);
+
+        long answer = cnt2 > cnt5 ? cnt5 : cnt2;
+        System.out.println(answer);
     }
-    public static int count(long start, long end,int x){
+    public static int count( long end,int x){
         int answer = 0;
-        for( long i = start ; i <= end ; i++){
-            long j = i;
-            while(j>0){
-                if(j%x == 0){
-                    answer++;
-                    j=j/x;
-                    continue;
-                }
-                break;
-            }
+        for( long i = x ; i <= end ; i*=x){
+            answer += end/i;
         }
         return answer;
     }
+
 }
