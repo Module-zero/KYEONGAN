@@ -15,21 +15,26 @@ public class Q11005 {
         long n = Long.parseLong(strArr[0]);
         long b = Long.parseLong(strArr[1]);
 
-        convert(n,b);
+        String sb = convert(n,b);
+        System.out.println(sb);
     }
 
     public static String convert(long n,long b){
-        b -=1;
         StringBuilder sb = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
+        Stack<Integer> stack = new Stack<>();
         while(n != 0){
-            System.out.println(n+":"+b);
-            long r = n%b;
-            System.out.println(90-r);
+            int r = Integer.parseInt(n%b+"");
+            stack.push(r);
             n/=b;
         }
         while(!stack.empty()){
-            System.out.println(stack.pop());
+            int num = stack.pop() ;
+            if(num > 9 ){
+                sb.append((char)(num+55));
+            }
+            else{
+                sb.append(num);
+            }
         }
         return sb.toString();
     }
