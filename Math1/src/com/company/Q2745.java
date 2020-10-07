@@ -20,5 +20,6 @@ public class Q2745 {
             answer += tmp*Math.pow(b,strLength--);
         }
         System.out.println(answer);
+        //
     }
 }
