@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 
 public class Q6588 {
     public static void main(String[] args)throws Exception{
-//        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader bf = new BufferedReader(new FileReader(new File("data.txt")));
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+//        BufferedReader bf = new BufferedReader(new FileReader(new File("data.txt")));
         StringBuilder sb = new StringBuilder();
         boolean[] arr = prime();
         while(true){
@@ -28,7 +28,7 @@ public class Q6588 {
                 sb.append("Goldbach's conjecture is wrong.").append("\n");
             }
         }
-        System.out.print(sb);
+        System.out.println(sb);
     }
     public static boolean[] prime(){
         int size = 1000001;
