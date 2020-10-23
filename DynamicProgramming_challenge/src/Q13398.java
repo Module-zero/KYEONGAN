@@ -14,27 +14,14 @@ public class Q13398 {
         for(int i = 0 ; i < n ; i ++){
             numArr[i] = Integer.parseInt(strArr[i]);
         }
-        int[] dp = new int[n];
-        dp[0] = Math.max(numArr[0],0);
-        int max = 0;
-        int min = 100001;
-        boolean flag = false;
+        int[][] dp = new int[n][2]; // 0번은 순수, 1번은 삭제
+        dp[0][0] = numArr[0];
+        dp[0][1] = numArr[0];
+        int max = numArr[1];
         for(int i = 1 ; i < n ; i ++){
-            dp[i] = Math.max(numArr[i]+dp[i-1],0);
-            for(int j = i ; j >= 0 ; j --){
-                if(min > numArr[j]){
-                    min = numArr[j];
-                    flag = true;
-                }
-            }
-            min = Math.min(min,0);
-            System.out.println(min);
-            if(flag){
-                flag = false;
-                dp[i] = dp[i] - min;
-            }
-            max = Math.max(dp[i], max);
-            System.out.println(i+":"+max);
+            dp[i][0] = dp[i-1][0]+numArr[i] > numArr[i] ? dp[i-1][0]+numArr[i] : numArr[i];
+            dp[i][1] = dp[i-1][0] > dp[i-1][1] + numArr[i] ? dp[i-1][0] : dp[i-1][1] + numArr[i];
+            max = Math.max(max,Math.max(dp[i][0],dp[i][1]));
         }
         System.out.println(max);
     }
