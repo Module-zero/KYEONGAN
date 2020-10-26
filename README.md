@@ -7,3 +7,5 @@
  - **중복된 값을 제거** 하기 위해서는 ```Hash 계열``` 의 자료구조를 사용하면 편리하다.
  - ```Arrays.sort(Array,startIdx,endIdx);``` 를 사용할 경우 ```startIdx``` 는 정렬 범위에 포함되나 ```endIdx``` 는 포함되지 않는다.  
  	따라서 ```endIdx``` 는 1 큰수를 넣어줘야 한다.
+ - ```ArrayList<Integer>[]``` 는 **ArrayList<Integer>** 를 담는 배열 타입이다. 즉, ```ArrayList<Integer>[0] = new ArrayList<Integer>``` 처럼 사용하며 대표적으로 **그래프** 관련 알고리즘을 풀때 사용한다.
+ - ```ArrayList``` 와 같은 컬랙션 타입의 정렬은 ```Arrays.sort()``` 가 아닌 ```Collections.sort()``` 를 사용할 수 있다. 
