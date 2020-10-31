@@ -9,3 +9,4 @@
  	따라서 ```endIdx``` 는 1 큰수를 넣어줘야 한다.
  - ```ArrayList<Integer>[]``` 는 **ArrayList<Integer>** 를 담는 배열 타입이다. 즉, ```ArrayList<Integer>[0] = new ArrayList<Integer>``` 처럼 사용하며 대표적으로 **그래프** 관련 알고리즘을 풀때 사용한다.
  - ```ArrayList``` 와 같은 컬랙션 타입의 정렬은 ```Arrays.sort()``` 가 아닌 ```Collections.sort()``` 를 사용할 수 있다. 
+ - 트리의 지름을 구하는 방법은 임의의 정점에서 가장 먼 정점을 구한 후 구해진 정점에서 가장 먼 정점까지의 거리가 트리의 지름이다.
