@@ -11,5 +11,5 @@
  - ```ArrayList``` 와 같은 컬랙션 타입의 정렬은 ```Arrays.sort()``` 가 아닌 ```Collections.sort()``` 를 사용할 수 있다. 
  - 트리의 지름을 구하는 방법은 임의의 정점에서 가장 먼 정점을 구한 후 구해진 정점에서 가장 먼 정점까지의 거리가 트리의 지름이다.
  - ```Collections.sort()``` 를 사용할 시 **두번째 인자로 정렬 기준** 을 지정할 수 있다. 여러 방법이 있지만, 익명함수를 사용하면 더욱 간단다하다.  
-ex) ```Collections.sort(list,(a,b) -> order[b] - order[a] ) ;```
+ex) ```Collections.sort(list,(a,b) -> order[b] - order[a] ) ;```  
 --> ```order``` 이라는 배열에 정렬 기준을 놓고 그 기준에 맞춰 정렬.
