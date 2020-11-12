@@ -6,52 +6,102 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Q16236 {
+    static int[][] map;
+    static LinkedList<int[]> queue;
+    static int n ;
+    static int[] moveI = {-1,1,0,0};
+    static int[] moveJ = {0,0,-1,1};
     public static void main(String[] args)throws Exception{
 //        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         BufferedReader bf = new BufferedReader(new FileReader(new File("data.txt")));
 
-        int n = Integer.parseInt(bf.readLine());
-        int[][] map = new int[n][n];
-        int[][] distance = new int[n][n];
-        ArrayList<int[]>[] list = new ArrayList[7];
-        for(int i = 0 ; i <= n ; i ++){
-            list[i] = new ArrayList<>();
-        }
-        LinkedList<int[]> queue = new LinkedList<>(); // 각 물고기 크기별로 좌표를 적어둔다.
+        n = Integer.parseInt(bf.readLine());
+        map = new int[n][n];
+        queue = new LinkedList<>();
         for(int i = 0 ; i < n ; i ++){
             String[] str = bf.readLine().split(" ");
             for(int j = 0 ; j < n ; j ++){
                 map[i][j] = Integer.parseInt(str[j]);
-                if(0 < map[i][j] && map[i][j] < 7 ) {
-                    list[map[i][j]].add(new int[]{i, j, 1}); // 물고기는 list에 추가한다.
-                }
-                else{
-                    queue.add(new int[]{i,j,2,0}); // 초기 상어의 위치를 queue에 넣는다.
+                if(map[i][j] == 9){
+                    queue.add(new int[]{i,j,2,0}); // 초기 상어의 위치를 queue에 넣는다. ( i,j,size,eatCnt)
+                    map[i][j] = 0;
                 }
             }
         }
-        int[] moveI = {-1,1,0,0};
-        int[] moveJ = {0,0,-1,1};
-        boolean[][] check = new  boolean[n][n];
-        while(!queue.isEmpty()){
+        int answer = 0 ;
+        LinkedList<int[]> tmpQueue = new LinkedList<>();
+        while(!queue.isEmpty()) {
             int[] start = queue.remove();
-            int idxI = start[0];
-            int idxJ = start[1];
+            int startI = start[0];
+            int startJ = start[1];
             int size = start[2];
-            int cnt = start[3];
-            int answer = Integer.MAX_VALUE;
-            int tmpStartI = idxI;
-            int tmpStartJ = idxJ;
-            for(int i = 1 ; i < size ; i ++){
-                for(int j = 0 ; j < list[i].size() ; j ++){
-                    int[] tmp = list[i].get(j);
-                    int min = Math.abs((idxI - tmp[0]) + (idxJ - tmp[1]);
-                    if(answer > min){
-                        answer = min;
-                        tmpStartI = 
+            int eatCnt = start[3];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if(0 < map[i][j] && map[i][j] < size){
+                        tmpQueue.add(new int[]{i,j});
                     }
                 }
             }
+
+            int minValue = Integer.MAX_VALUE;
+            boolean arr = false;
+            int findI = startI;
+            int findJ = startJ;
+            while(!tmpQueue.isEmpty()){
+                int[] find = tmpQueue.remove();
+                int tmp = bfs(startI,startJ,find[0],find[1],size);// startI,J -> findI,J 까지 가는 bfs를 구한다.
+                if( tmp == -1)continue;
+                if(minValue > tmp){
+                    findI = find[0];
+                    findJ = find[1];
+                    minValue = tmp;
+                }
+                arr= true;
+            }
+            if(!arr)continue;
+            answer += minValue;
+            eatCnt += 1;
+            if(eatCnt == size){
+                size ++;
+                eatCnt = 0;
+            }
+            map[findI][findJ] = 0;
+            queue.add(new int[]{findI,findJ,size,eatCnt});
+        }
+        System.out.println(answer);
+    }
+    public static int bfs(int startI, int startJ, int findI, int findJ, int size){
+        queue.add(new int []{startI,startJ,0});
+        boolean[][] check = new boolean[n][n];
+        check[startI][startJ] = true;
+        boolean arrive = false;
+        int answer = 0 ;
+        while(!queue.isEmpty()){
+            int[] idx = queue.remove();
+            int idxI = idx[0];
+            int idxJ = idx[1];
+            int cnt = idx[2];
+            for(int i = 0 ; i < 4; i ++){
+                int curI = idxI + moveI[i];
+                int curJ = idxJ + moveJ[i];
+                if(curI < 0 || curJ < 0 || curI >= n || curJ >= n)continue;
+                if(map[curI][curJ] > size)continue;
+                if(check[curI][curJ])continue;
+                check[curI][curJ] = true;
+                if(curI == findI && curJ == findJ){
+                    arrive = true;
+                    answer = cnt+1;
+                    continue;
+                }
+                queue.add(new int[] {curI,curJ,cnt+1});
+            }
+        }
+        if(arrive){
+            return answer;
+        }
+        else{
+            return -1;
         }
     }
 }
