@@ -1,12 +1,51 @@
-/* 늑대와 양 - 예습
-*
-* 1. 입력받은 맵을 전체 순회하며 ws가 인접한지 검사한다.
-* 2-1. 인접했을 시 0 출력 후 종료
-* 2-2. 인접하지 않았을 시 계속 진행.
-* 3. 전체를 한번 더 순회하며 w일 경우만 queue에 넣는다.(bfs)
-* 4. 만약 s 또는 d에 도달했다면 현 위치에 d를 설치할 것을 메모한다.
-* 5. 출력.
-*
-* */
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+
 public class Q16956 {
+    static int[][] move = {{-1,0},{1,0},{0,1},{0,-1}};
+    public static void main(String[] args)throws Exception{
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+//        BufferedReader bf = new BufferedReader(new FileReader(new File("data.txt")));
+
+        String[] size = bf.readLine().split(" ");
+        int n = Integer.parseInt(size[0]);
+        int m = Integer.parseInt(size[1]);
+
+        char[][] map = new char[n][m];
+        for(int i = 0 ; i < n ; i ++){
+            String str = bf.readLine();
+            for(int j = 0 ; j < m ; j ++){
+                map[i][j] = str.charAt(j);
+            }
+        }
+
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                if(map[i][j] != 'W')continue;
+                for(int k = 0 ; k < 4 ; k ++){
+                    int curI = i + move[k][0];
+                    int curJ = j + move[k][1];
+                    if(curI < 0 || curJ < 0 || curI >=n || curJ >=m)continue;
+                    if(map[curI][curJ] == 'S'){
+                        System.out.println(0);
+                        return;
+                    }
+                    if(map[curI][curJ]!='W') {
+                        map[curI][curJ] = 'D';
+                    }
+                }
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("1\n");
+        for(char[] mm : map){
+            for(char mmm : mm){
+                sb.append(mmm);
+            }
+            sb.append("\n");
+        }
+        System.out.println(sb);
+    }
 }
