@@ -62,6 +62,6 @@ public class Q1202 {
                 }
             }
         }
-        System.out.rintln(answer);
+        System.out.println(answer);
     }
 }
