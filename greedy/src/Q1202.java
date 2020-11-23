@@ -61,7 +61,7 @@ public class Q1202 {
                     bags.put(c,val);
                 }
             }
-        }ㅅ
-        System.out.println(answer);
+        }
+        System.out.rintln(answer);
     }
 }
