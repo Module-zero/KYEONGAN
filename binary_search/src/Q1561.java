@@ -49,7 +49,7 @@ public class Q1561 {
             }
             if(begin == n){
                 System.out.println(i+1);
-                return;
+                return ;
             }
         }
 
