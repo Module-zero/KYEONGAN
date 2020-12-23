@@ -15,31 +15,37 @@ public class Q2447 {
         n = Integer.parseInt(bf.readLine());
         star = new char[n][n];
         divide(0,0,n,n,n);
+        StringBuilder sb = new StringBuilder();
         for(char[] ii : star){
             for(char i : ii){
-                System.out.print(i);
+                if( i =='*') {
+                    sb.append(i);
+                }
+                else{
+                    sb.append(" ");
+                }
             }
-            System.out.println(" ");
+            sb.append("\n");
         }
+        System.out.println(sb.toString());
     }
     public static void divide(int startI, int startJ,int endI,int endJ, int size){
-        if(size == 1){
-            star[startI][startJ] = '*';
-           return;
+        if(size == 3){
+            for(int i = startI ; i < startI+3 ; i ++){
+                for(int j = startJ ; j < startJ+3; j++){
+                    if(i == startI+1 && j == startJ+1)continue;
+                    star[i][j] = '*';
+                }
+            }
+            return;
         }
         else{
             int midI = startI + size / 3;
             int midJ = startJ + size / 3;
-            for(int i = startI; i < endI; i++){
-                for(int j = startJ ; j < endJ; j ++){
-                    if(midI <= i && i < midI+size/3 && midJ <= j && j < midJ+size/3){
-                        star[startI][startJ] = ' ';
-                    }
-                    else{
-                        if(i+size/3< n && j+size/3 < n) {
-                            divide(i, j, i + size / 3, j + size / 3, size / 3);
-                        }
-                    }
+            for(int i = startI; i < endI; i+=(size/3)){
+                for(int j = startJ ; j < endJ; j +=(size/3)){
+                    if(midI == i &&  midJ == j )continue;
+                    divide(i, j, i + size / 3, j + size / 3, size / 3);
                 }
             }
         }
