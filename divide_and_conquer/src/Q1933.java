@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Q1933 {
-    static ArrayList<int[]> queue ;
+    static ArrayList<long[]> queue ;
     public static void main(String[] args)throws Exception{
 //        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         BufferedReader bf = new BufferedReader(new FileReader(new File("data.txt")));
@@ -14,27 +14,27 @@ public class Q1933 {
         queue = new ArrayList<>();
         for(int i = 0 ; i < n ; i ++){
             String[] str = bf.readLine().split(" ");
-            int l = Integer.parseInt(str[0]);
-            int height = Integer.parseInt(str[1]);
-            int r = Integer.parseInt(str[2]);
-            queue.add(new int[]{l,height});
-            queue.add(new int[]{r,-height});
+            long l = Long.parseLong(str[0]);
+            long height = Long.parseLong(str[1]);
+            long r = Long.parseLong(str[2]);
+            queue.add(new long[]{l,height});
+            queue.add(new long[]{r,-height});
         }
-        Collections.sort(queue, new Comparator<int[]>() {
+        Collections.sort(queue, new Comparator<long[]>() {
             @Override
-            public int compare(int[] o1, int[] o2) {
-                if(o1[0] == o2[0])return o1[1] - o2[1];
-                return o1[0] - o2[0];
+            public int compare(long[] o1, long[] o2) {
+                if(o1[0] == o2[0])return (int)(o1[1] - o2[1]);
+                return (int)(o1[0] - o2[0]);
             }
         });
-        int maxHeight = 0;
-        TreeSet<Integer> tmp = new TreeSet<>();
-        TreeMap<Integer,Integer> answer = new TreeMap<>();
-        for(int[] t : queue){
+        long maxHeight = 0;
+        TreeMap<Long,Long> tmp = new TreeMap<>();
+        TreeMap<Long,Long> answer = new TreeMap<>();
+        for(long[] t : queue){
             // 시작점일경우
             if(t[1] > 0){
+                tmp.put(t[1],tmp.getOrDefault(t[1],(long)0)+1);
                 //갱신
-                tmp.add(t[1]);
                 if(maxHeight < t[1]){
                     maxHeight = t[1];
                     answer.put(t[0],maxHeight);
@@ -43,28 +43,36 @@ public class Q1933 {
             //끝점일경우
             else{
                 // 최고높이
-                if(tmp.contains(-t[1])){
-                    tmp.remove(-t[1]);
-                    if(maxHeight == -t[1]){
+                long tmpH = t[1]*(-1);
+                if(tmp.containsKey(tmpH)){
+                    tmp.put(tmpH, tmp.get(tmpH) - 1);
+                    if(tmp.get(tmpH) == 0){
+                        tmp.remove(tmpH);
+                    }
+                    if(maxHeight == tmpH){
                         if(!tmp.isEmpty()) {
-                            maxHeight = tmp.last();
+                            long tmpKey = tmp.lastKey();
+                            maxHeight = tmpKey;
                         }
                         else{
                             maxHeight = 0;
                         }
-                        answer.put(t[0],maxHeight);
+                        if(maxHeight < tmpH) {
+                            answer.put(t[0], maxHeight);
+                        }
                     }
                 }
             }
         }
         StringBuilder sb = new StringBuilder();
-        Iterator<Integer> it = answer.keySet().iterator();
-        while(it.hasNext()){
-            int key = it.next();
-            int value = answer.get(key);
-            sb.append(key+" "+value+" ");
+        Set<Long> it = answer.keySet();
+        for(Long k : it){
+            long key = k;
+            long value = answer.get(key);
+            sb.append(key).append(" ").append(value).append(" ");
         }
-        System.out.println(sb.toString());
+        sb.deleteCharAt(sb.length()-1);
+        System.out.print(sb);
 
     }
 }
