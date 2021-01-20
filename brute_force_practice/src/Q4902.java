@@ -73,5 +73,5 @@ public class Q4902 {
             }
             System.out.println(" ");
         }
-    } 
+    }
 }
