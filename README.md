@@ -20,3 +20,34 @@ ex) ```Collections.sort(list,(a,b) -> order[b] - order[a] ) ;```
 Ex) 오차범위가 10^-3 일 경우 **10^-3 * 10^-1 = 10^-4 의 역수는 10000 ** 로 한다!!
 - 가중치가 있는 단방향 그래프는 편도로 왔다갔다 보다 반대 방향의 그래프를 하나 더 만들어서 그래프를 총 2개를 이용해서  왔다갔다 거리를 측정하는게 훨 속도가 빠르다.  
 
+## union find ( 상호 배타적 조합 )
+이 알고리즘은 원소 a 와 b사이의 관계에 대해 알아보고자 할 때 사용한다.  
+즉, a가 있는 집단에 b가 있는지, b가 있는 집단에 a가 있는지 를 알아보기 위해 사용한다. 
+a 와 b의 관계를 알아보기 위해 사용하는 ```find()``` 함수는 다음과 같다.
+```
+int find(a){
+	if(a == parent[a])
+		return a;
+	else
+		return parent[a] = find(parent[a]); // 경로 압축
+}
+```
+- a와 b의 집합을 합칠 때 사용하는 ```union()``` 다음과 같다. (-> 각 집합의 weight(rank)를 유의하여 합쳐야 한다)
+```
+void union(int a, int b){
+	a = find(a);
+	b = find(b);
+	if(a == b) // 두 수의 부모가 같다면 
+		return ; // 함수 종료
+		
+	// 두 수의 weight (rank)를 비교한다.
+	if(rank[a] > rank[b]){  
+		parent[b] = a; 		// rank 가 작은 집합의 부모에 다른 수를 집어넣는다. 
+		rank[a] += rank[b];	// 랭크도 같이 ! ( 랭크는 랭크가 큰 집합의 부모에 작은 집합의 부모의 랭크를 더한다)
+	}
+	else{
+		parent[a] = b;
+		rank[b] += rank[a];	
+	}
+}
+```
