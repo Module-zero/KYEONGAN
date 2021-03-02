@@ -4,7 +4,8 @@ import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
-public class Qprogrammers1 {
+// 무슨 길찾기인데 기억안남..
+public class Programmers1 {
     static int MOD = 20170805;
     public static void main(String[] args)throws Exception{
         BufferedReader bf = new BufferedReader(new FileReader(new File("data.txt")));
