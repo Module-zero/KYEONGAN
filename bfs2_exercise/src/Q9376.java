@@ -22,6 +22,7 @@ public class Q9376 {
     static int[][] move = {{1,0},{-1,0},{0,1},{0,-1}};
     static int n;
     static int m;
+    static int MAX ;
     static char[][] map;
     public static void main(String[] args)throws Exception{
 //        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -31,7 +32,7 @@ public class Q9376 {
             String[] strArr = bf.readLine().split(" ");
             n = Integer.parseInt(strArr[0]);
             m = Integer.parseInt(strArr[1]);
-
+            MAX = (n+2)*(m+2)+2;
             map = new char[n+2][m+2];
             int[][] thief = new int[2][2];
             int[][] out = new int[n+2][m+2];
@@ -59,10 +60,11 @@ public class Q9376 {
             bfs(0,0,out);
             bfs(thief[0][0],thief[0][1],t1);
             bfs(thief[1][0],thief[1][1],t2);
-            int answer = (n+2)*(m+2)+2;
+            int answer = MAX;
             for(int i = 0 ; i < n+2 ; i ++){
                 for(int j = 0 ; j < m+2; j ++){
                     if(map[i][j] == '*')continue;
+                    if(out[i][j] == -1 || t1[i][j] == -1|| t2[i][j] == -1)continue;
                     int tmp = out[i][j] + t1[i][j] + t2[i][j];
                     if(map[i][j] == '#'){
                         tmp = tmp - 2;
