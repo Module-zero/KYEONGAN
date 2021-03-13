@@ -28,7 +28,7 @@ int gcd (int A, int B ){
 	return a;
 }
 ```
-#### 최소 공배수(GCD) 구하기
+#### 최소 공배수(LCM) 구하기
 1. 입력받은 두 수와 최대공약수를 통해 구할 수 있다.
 ```
 int LCM(int A, int B, int gcd){
