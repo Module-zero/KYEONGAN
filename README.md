@@ -9,6 +9,7 @@
 #### 대표유형
 책 페이지 https://www.acmicpc.net/problem/1019  
 제곱 ㄴㄴ 수 https://www.acmicpc.net/problem/1016  
+#### 효율성 
 1. **Check** 용 배열을 선언할 시 ```max``` 와 ```min``` 의 값이 주어진 경우 인덱싱을 하여 배열의 크기를 ```max-min+1```로 선언한다.  
 	_이는 배열 사용 시 ```접근 인덱스 - min``` 을 해서 사용한다._
 
