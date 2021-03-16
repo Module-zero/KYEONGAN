@@ -47,12 +47,36 @@ int LCM(int A, int B, int gcd){
 ```
 
 ## 분할정복
-> 주로 범위가 클 경우 사용
+> 주로 거듭제곱을 하는 과정에서 범위가 클 경우 사용
 - Ex) 10^10 을 구하는 과정을 예로 들 경우   
 =>  10^10  
 =>  A = (10^5), A * A   
 =>  B = (10^2 * 10^2 * 10), B * B   
 =>  C = 10 * 10, C * C * 10 * C * C * 10 으로 한다.  
+```
+int function(int number, int curNum){
+	int ret ;
+	if( curNum == 1 ){
+		ret = number;
+	}
+```
+- 1일 경우 원래 거듭제곱을 하는 수 반환
+```
+	else if( curNum % 2 == 0){
+		int A = function(number,curNum/2);
+		ret = A*A;
+	}
+```
+- 짝수일 경우 2로 나눈 값을 메모리제이션 한 후 그것을 제곱해서 반환
+```
+	else{
+		int A  = function(number,curNum-1);
+		ret = A * number;
+	}
+	return ret;
+}
+```
+- 홀수일 경우 원래 거듭제곱을 하는 수 * 1 작은 수 만큼 거듭제곱 후 
 
 ---
 
