@@ -33,7 +33,7 @@
 int gcd (int A, int B ){
 	int a = A;
 	int b = B;
-	while(b != a ){
+	while(b != 0 ){
 		int r = a % b;
 		a = b;
 		b = r;
