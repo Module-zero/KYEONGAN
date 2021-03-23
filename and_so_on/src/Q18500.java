@@ -27,7 +27,7 @@ public class Q18500 {
             int broken ;
             if(i % 2 == 0){
                 broken = 0;
-                while(broken < R && map[height][broken] != 'x'){
+                while(broken < C && map[height][broken] != 'x'){
                     broken++;
                 }
             }
@@ -37,7 +37,7 @@ public class Q18500 {
                     broken--;
                 }
             }
-            if(0 <= broken && broken < R){
+            if(0 <= broken && broken < C){
                 map[height][broken] = '.';
                 solve(height,broken);
             }
