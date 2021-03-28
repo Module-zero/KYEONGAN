@@ -148,3 +148,5 @@ void union(int a, int b){
 	}
 }
 ```
+#### 대표문제
+MooTube https://www.acmicpc.net/problem/15591
