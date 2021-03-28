@@ -154,3 +154,7 @@ void union(int a, int b){
 ```
 #### 대표문제
 MooTube https://www.acmicpc.net/problem/15591
+
+#### 크루스칼 알고리즘
+- Union find 의 응용 알고리즘
+- 모든 간선의 값을 **오름차순으로 정렬** 후 union을 하며 순회하는 최단거리를 계산.
