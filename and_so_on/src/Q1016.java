@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import static java.lang.System.out;
 
 public class Q1016 {
     public static void main(String[] args)throws Exception{
@@ -19,7 +21,8 @@ public class Q1016 {
             }
         }
 
-        System.out.println(answer);
+        out.println(answer);
     }
+
 }
 
