@@ -1,6 +1,12 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+/**
+ *  두 문자열이 주어질 때 두 문자열의 공통 부분을 합쳐 이어 붙인 문자열 중 길이가 가장 짧은 문자열을 반환하라 (단, 길이가 같은 문자열이 여러개일 경우
+ * 그 중 사전순으로 가장 먼저 위치하는 문자열을 반환 할 겻)
+ * 예1 ) AxA, AyA 일 경우 AxAyA 출력
+ * 예2 ) abcXY XYZa 일 경우 abcXYZa 출력
+ *
+ * */
 public class QTest {
     public static void main(String[] args)throws Exception{
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
